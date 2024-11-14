@@ -11,7 +11,7 @@ async function cartPlugin(server: FastifyInstance) {
 
   server.delete('/products/:productId', { schema: deleteProductSchema }, deleteProductHandler)
 
-  server.put('/products/discount', { schema: setDiscountSchema }, setDiscountHandler)
+  server.put('/discount', { schema: setDiscountSchema }, setDiscountHandler)
 }
 
 export default cartPlugin

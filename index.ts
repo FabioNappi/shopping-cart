@@ -1,9 +1,14 @@
 import fastify from 'fastify'
 import cartPlugin from './src/cartPlugin'
+import { fastifySwagger } from '@fastify/swagger'
+import { fastifySwaggerUi } from '@fastify/swagger-ui'
 
 const server = fastify({
   logger: true,
 })
+
+server.register(fastifySwagger)
+server.register(fastifySwaggerUi)
 
 server.register(cartPlugin, { prefix: '/cart' })
 
