@@ -1,4 +1,5 @@
-import { FastifyReply, FastifyRequest, FastifySchema } from "fastify"
+import { FastifyInstance, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
+import { discountSchema, errorSchema } from "../schemas"
 
 const schema: FastifySchema = {
   body: {
@@ -12,51 +13,21 @@ const schema: FastifySchema = {
   },
   response: {
     200: {
+      ...discountSchema,
       description: 'Discount code found and applied',
-      type: 'object',
-      properties: {
-        code: { type: 'string' },
-        type: {
-          type: 'string',
-          enum: [
-            'fixed',
-            'percentage'
-          ]
-        },
-        amount: { type: 'number' },
-      },
-      required: [
-        'code',
-        'type',
-        'amount',
-      ]
     },
     400: {
+      ...errorSchema,
       description: 'Validation error',
-      type: 'object',
-      properties: {
-        error: { type: 'string' },
-        message: { type: 'string' },
-      },
-      required: [
-        'error'
-      ]
     },
     404: {
+      ...errorSchema,
       description: 'Discount code not found',
-      type: 'object',
-      properties: {
-        error: { type: 'string' },
-        message: { type: 'string' },
-      },
-      required: [
-        'error'
-      ]
     }
   }
 }
 
-const handler = async (request: FastifyRequest, reply: FastifyReply) => {
+async function handler(this: FastifyInstance, request: FastifyRequest, reply: FastifyReply) {
   return { hello: 'world' }
 }
 

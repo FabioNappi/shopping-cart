@@ -1,4 +1,5 @@
-import { FastifyReply, FastifyRequest, FastifySchema } from "fastify"
+import { FastifyInstance, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
+import { errorSchema } from "../schemas"
 
 const schema: FastifySchema = {
   querystring: {
@@ -22,20 +23,13 @@ const schema: FastifySchema = {
       type: 'null',
     },
     404: {
+      ...errorSchema,
       description: 'Product not found',
-      type: 'object',
-      properties: {
-        error: { type: 'string' },
-        message: { type: 'string' },
-      },
-      required: [
-        'error'
-      ]
     }
   }
 } as const
 
-const handler = async (request: FastifyRequest, reply: FastifyReply) => {
+async function handler(this: FastifyInstance, request: FastifyRequest, reply: FastifyReply) {
   return { hello: 'world' }
 }
 
