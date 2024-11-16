@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
-import { errorSchema, ProductReference, productReferenceSchema, productSchema } from "../schemas"
+import { errorSchema, ProductReference, productReferenceSchema } from "../schemas"
+import { productSchema } from "../data"
 
 const schema: FastifySchema = {
   body: productReferenceSchema,

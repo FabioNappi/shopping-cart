@@ -1,3 +1,2 @@
-export * from './discount'
 export * from './error'
-export * from './product'
+export * from './product-reference'

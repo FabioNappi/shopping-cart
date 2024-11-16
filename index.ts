@@ -4,20 +4,26 @@ import { fastifySwagger } from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import mongoConnector from './src/data/mongo-connector'
 
-const server = fastify({
-  logger: true,
-})
+async function main() {
+  const server = fastify({
+    logger: true,
+  })
+  
+  server.register(mongoConnector)
+  server.register(fastifySwagger)
+  server.register(fastifySwaggerUi)
+  
+  server.register(cartPlugin, { prefix: '/cart' })
+  
+  // Run the server!
+  server.listen({ port: 3000 }, function (err) {
+    if (err) {
+      server.log.error(err)
+      process.exit(1)
+    }
+  })
+}
 
-server.register(mongoConnector)
-server.register(fastifySwagger)
-server.register(fastifySwaggerUi)
+main()
 
-server.register(cartPlugin, { prefix: '/cart' })
-
-// Run the server!
-server.listen({ port: 3000 }, function (err) {
-  if (err) {
-    server.log.error(err)
-    process.exit(1)
-  }
-})
+export default main
