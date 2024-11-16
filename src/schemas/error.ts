@@ -6,8 +6,6 @@ const errorCodes = [
   'INVALID_QUANTITY',
 ] as const
 
-type ErrorCode = typeof errorCodes[number]
-
 export const errorSchema = {
   type: 'object',
   properties: {

@@ -40,7 +40,7 @@ const schema: FastifySchema = {
     200: reply,
     404: {
       ...errorSchema,
-      description: 'Product not found',
+      description: 'Product or discount not found',
     },
   }
 }
