@@ -8,11 +8,11 @@ import { Discount, ErrorResponse, Product } from "../schemas"
 
 async function cartPlugin(server: FastifyInstance) {
   if (server.mongo.db === undefined) {
-    throw new Error('could not connect to mongodb')
+    throw new Error('could not connect to database')
   }
   const productsCollection = server.mongo.db.collection<Product>('products')
-  server.decorate('productsCollection', productsCollection)
   const discountsCollection = server.mongo.db.collection<Discount>('discounts')
+  server.decorate('productsCollection', productsCollection)
   server.decorate('discountsCollection', discountsCollection)
 
   const initialCart: Cart = {

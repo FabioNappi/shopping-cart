@@ -40,7 +40,7 @@ const schema: FastifySchema = {
       description: 'Product not found',
     }
   }
-} as const
+}
 
 async function handler(this: FastifyInstance, request: FastifyRequest<{Params: Params, Querystring: Querystring}>, reply: FastifyReply) {
   const productIndex = this.cart.products.findIndex(product => product.productId === request.params.productId)

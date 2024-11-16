@@ -1,15 +1,12 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
-import { errorSchema, ProductReference, productReferenceSchema } from "../schemas"
+import { errorSchema, ProductReference, productReferenceSchema, productSchema } from "../schemas"
 
 const schema: FastifySchema = {
   body: productReferenceSchema,
   response: {
     201: {
+      ...productSchema,
       description: 'Product added to cart',
-      type: 'object',
-      properties: {
-        message: { type: 'string' },
-      },
     },
     400: {
       ...errorSchema,
@@ -20,7 +17,7 @@ const schema: FastifySchema = {
       description: 'Product not found',
     },
   }
-} as const
+}
 
 async function handler(this: FastifyInstance, request: FastifyRequest<{Body: ProductReference}>, reply: FastifyReply) {
   const productToAdd = request.body
@@ -35,7 +32,7 @@ async function handler(this: FastifyInstance, request: FastifyRequest<{Body: Pro
   } else {
     this.cart.products[productIndex].quantity += productToAdd.quantity
   }
-  reply.code(201).send({ message: 'Product added' })
+  reply.code(201).send(product)
 }
 
 export {

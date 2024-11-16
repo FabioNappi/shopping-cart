@@ -77,7 +77,7 @@ async function handler(this: FastifyInstance, request: FastifyRequest, reply: Fa
       resultingTotal -= foundDiscount.amount
       break
     case 'percentage':
-      resultingTotal -= Math.floor(resultingTotal * 100 / foundDiscount.amount)
+      resultingTotal -= Math.floor(resultingTotal * foundDiscount.amount / 100)
       break
     default:
       break
