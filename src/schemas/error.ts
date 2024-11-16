@@ -1,7 +1,8 @@
 import { FromSchema } from "json-schema-to-ts"
 
 const errorCodes = [
-  'PRODUCT_NOT_FOUND'
+  'PRODUCT_NOT_FOUND',
+  'DISCOUNT_NOT_FOUND'
 ] as const
 
 type ErrorCode = typeof errorCodes[number]
