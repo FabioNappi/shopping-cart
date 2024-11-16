@@ -1,10 +1,6 @@
 import { mongodb } from "@fastify/mongodb"
-import { Discount, ErrorResponse, Product, ProductReference } from "./src/schemas"
-
-export interface Cart {
-  products: ProductReference[],
-  discount: string | undefined
-}
+import { Cart, ErrorResponse } from "./src/schemas"
+import { Discount, Product } from "./src/data"
 
 declare module 'fastify' {
   interface FastifyInstance {

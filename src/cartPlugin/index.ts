@@ -3,8 +3,7 @@ import { handler as getCartHandler, schema as getCartSchema } from "./getCart"
 import { handler as addProductHandler, schema as addProductSchema } from "./addProduct"
 import { handler as deleteProductHandler, schema as deleteProductSchema } from "./deleteProduct"
 import { handler as setDiscountHandler, schema as setDiscountSchema } from "./setDiscount"
-import { Cart } from "../../types"
-import { ErrorResponse } from "../schemas"
+import { Cart, ErrorResponse } from "../schemas"
 import { Discount, Product } from "../data"
 
 async function cartPlugin(server: FastifyInstance) {
