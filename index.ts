@@ -2,11 +2,13 @@ import fastify from 'fastify'
 import cartPlugin from './src/cartPlugin'
 import { fastifySwagger } from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
+import mongoConnector from './src/data/mongo-connector'
 
 const server = fastify({
   logger: true,
 })
 
+server.register(mongoConnector)
 server.register(fastifySwagger)
 server.register(fastifySwaggerUi)
 

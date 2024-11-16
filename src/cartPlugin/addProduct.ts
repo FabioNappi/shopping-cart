@@ -23,15 +23,19 @@ const schema: FastifySchema = {
 } as const
 
 async function handler(this: FastifyInstance, request: FastifyRequest<{Body: ProductReference}>, reply: FastifyReply) {
-  const toAdd = request.body
-  // TODO verify product exists
-  const productIndex = this.cart.products.findIndex(product => product.productId === toAdd.productId)
-  if (productIndex === -1) {
-    this.cart.products.push(toAdd)
-  } else {
-    this.cart.products[productIndex].quantity += toAdd.quantity
+  const productToAdd = request.body
+  const product = await this.productsCollection.findOne({ productId: productToAdd.productId })
+  if (!product) {
+    return reply.sendError(404, { error: 'PRODUCT_NOT_FOUND' })
   }
-  return { message: 'Product added' }
+
+  const productIndex = this.cart.products.findIndex(product => product.productId === productToAdd.productId)
+  if (productIndex === -1) {
+    this.cart.products.push(productToAdd)
+  } else {
+    this.cart.products[productIndex].quantity += productToAdd.quantity
+  }
+  reply.code(201).send({ message: 'Product added' })
 }
 
 export {
