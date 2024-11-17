@@ -1,10 +1,10 @@
-import fastify from 'fastify'
+import fastify, { FastifyInstance } from 'fastify'
 import cartPlugin from './src/cartPlugin'
 import { fastifySwagger } from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import mongoConnector from './src/data/mongo-connector'
 
-async function main() {
+export async function launchServer(): Promise<FastifyInstance> {
   const server = fastify({
     logger: true,
   })
@@ -30,11 +30,10 @@ async function main() {
       process.exit(1)
     }
   })
+
+  return server
 }
 
-main()
-
-export default main
-
-// da fare
-// TODO test suite
+if (require.main === module) {
+  launchServer()
+}
