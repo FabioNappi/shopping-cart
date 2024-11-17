@@ -3,23 +3,16 @@ import { handler as getCartHandler, schema as getCartSchema } from "./getCart"
 import { handler as addProductHandler, schema as addProductSchema } from "./addProduct"
 import { handler as deleteProductHandler, schema as deleteProductSchema } from "./deleteProduct"
 import { handler as setDiscountHandler, schema as setDiscountSchema } from "./setDiscount"
-import { Cart, ErrorResponse } from "../schemas"
-import { Discount, Product } from "../data"
+import { ErrorResponse } from "../schemas"
+import { setupDatabase } from "../data/mongo-connector"
 
 async function cartPlugin(server: FastifyInstance) {
-  if (server.mongo.db === undefined) {
-    throw new Error('could not connect to database')
-  }
-  const productsCollection = server.mongo.db.collection<Product>('products')
-  const discountsCollection = server.mongo.db.collection<Discount>('discounts')
-  server.decorate('productsCollection', productsCollection)
-  server.decorate('discountsCollection', discountsCollection)
+  await setupDatabase(server)
 
-  const initialCart: Cart = {
+  server.decorate('cart', {
     products: [],
     discount: undefined,
-  }
-  server.decorate('cart', initialCart)
+  })
 
   server.decorateReply('sendError', function sendError(code: number, error: ErrorResponse) {
     this.code(code).send(error)

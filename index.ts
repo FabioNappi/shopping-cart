@@ -27,3 +27,7 @@ async function main() {
 main()
 
 export default main
+
+// da fare
+// TODO test suite
+// TODO docker compose
