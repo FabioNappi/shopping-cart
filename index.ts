@@ -16,7 +16,7 @@ async function main() {
   server.register(cartPlugin, { prefix: '/cart' })
   
   // Run the server!
-  server.listen({ port: 3000 }, function (err) {
+  server.listen({ host: '0.0.0.0', port: 3000 }, function (err) {
     if (err) {
       server.log.error(err)
       process.exit(1)
@@ -30,4 +30,3 @@ export default main
 
 // da fare
 // TODO test suite
-// TODO docker compose
