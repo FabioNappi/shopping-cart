@@ -14,8 +14,8 @@ export async function launchServer(): Promise<FastifyInstance> {
     openapi: {
       info: {
         title: 'Shopping Cart',
-        description: 'Shopping cart management exercize',
-        version: '0.1.0'
+        description: 'Shopping cart management exercize.',
+        version: '1.0.0'
       }
     }
   })
