@@ -5,6 +5,7 @@ import { handler as deleteProductHandler, schema as deleteProductSchema } from "
 import { handler as setDiscountHandler, schema as setDiscountSchema } from "./setDiscount"
 import { ErrorResponse } from "../schemas"
 import { setupDatabase } from "../data/mongo-connector"
+import { errorHandler } from "./errorHandler"
 
 async function cartPlugin(server: FastifyInstance) {
   await setupDatabase(server)
@@ -17,6 +18,8 @@ async function cartPlugin(server: FastifyInstance) {
   server.decorateReply('sendError', function sendError(code: number, error: ErrorResponse) {
     this.code(code).send(error)
   })
+
+  server.setErrorHandler(errorHandler)
 
   server.get('/', { schema: getCartSchema }, getCartHandler)
 

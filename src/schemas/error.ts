@@ -4,6 +4,8 @@ const errorCodes = [
   'PRODUCT_NOT_FOUND',
   'DISCOUNT_NOT_FOUND',
   'INVALID_QUANTITY',
+  'VALIDATION_ERROR',
+  'UNKNOWN_ERROR',
 ] as const
 
 export const errorSchema = {
