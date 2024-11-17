@@ -7,7 +7,7 @@ import { Discount } from "./discount";
 const UNIQUE_PRODUCT_FIELD = 'productId'
 const UNIQUE_DISCOUNT_FIELD = 'code'
 
-const conditionalCreateUniqueIndex = async (collection: mongodb.Collection<any>, index: string) => {
+const conditionalCreateUniqueIndex = async <T extends mongodb.BSON.Document = never>(collection: mongodb.Collection<T>, index: string) => {
   if (!(await collection.indexExists(index))) {
     await collection.createIndex(index, { name: index, unique: true })
   }
