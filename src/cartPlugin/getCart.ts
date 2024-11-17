@@ -37,6 +37,7 @@ const reply = {
 type Reply = FromSchema<typeof reply>
 
 const schema: FastifySchema = {
+  tags: ['Cart'],
   response: {
     200: reply,
     404: {

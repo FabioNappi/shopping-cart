@@ -24,6 +24,7 @@ const querystring = {
 type Querystring = FromSchema<typeof querystring>
 
 const schema: FastifySchema = {
+  tags: ['Products'],
   querystring,
   params,
   response: {

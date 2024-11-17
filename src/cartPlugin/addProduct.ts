@@ -3,6 +3,7 @@ import { errorSchema, ProductReference, productReferenceSchema } from "../schema
 import { productSchema } from "../data"
 
 const schema: FastifySchema = {
+  tags: ['Products'],
   body: productReferenceSchema,
   response: {
     201: {

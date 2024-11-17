@@ -16,6 +16,7 @@ const body = {
 type Body = FromSchema<typeof body>
 
 const schema: FastifySchema = {
+  tags: ['Discounts'],
   body,
   response: {
     200: {

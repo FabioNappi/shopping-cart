@@ -10,7 +10,15 @@ async function main() {
   })
   
   server.register(mongoConnector)
-  server.register(fastifySwagger)
+  server.register(fastifySwagger, {
+    openapi: {
+      info: {
+        title: 'Shopping Cart',
+        description: 'Shopping cart management exercize',
+        version: '0.1.0'
+      }
+    }
+  })
   server.register(fastifySwaggerUi)
   
   server.register(cartPlugin, { prefix: '/cart' })
