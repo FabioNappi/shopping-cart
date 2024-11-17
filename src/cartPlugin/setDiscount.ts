@@ -37,7 +37,10 @@ const schema: FastifySchema = {
 async function handler(this: FastifyInstance, request: FastifyRequest<{Body: Body}>, reply: FastifyReply) {
   const foundDiscount = await this.discountsCollection.findOne({ code: request.body.code })
   if (foundDiscount === null) {
-    return reply.sendError(404, { error: 'DISCOUNT_NOT_FOUND' })
+    return reply.sendError(404, {
+      error: 'DISCOUNT_NOT_FOUND',
+      message: `product '${request.body.code}' not found in cart`,
+    })
   }
 
   this.cart.discount = request.body.code

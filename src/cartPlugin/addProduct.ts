@@ -25,7 +25,10 @@ async function handler(this: FastifyInstance, request: FastifyRequest<{Body: Pro
   const productToAdd = request.body
   const product = await this.productsCollection.findOne({ productId: productToAdd.productId })
   if (!product) {
-    return reply.sendError(404, { error: 'PRODUCT_NOT_FOUND' })
+    return reply.sendError(404, {
+      error: 'PRODUCT_NOT_FOUND',
+      message: `product '${productToAdd.productId}' not found`
+    })
   }
 
   const productIndex = this.cart.products.findIndex(product => product.productId === productToAdd.productId)
