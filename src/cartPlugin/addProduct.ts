@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
-import { errorSchema, ProductReference, productReferenceSchema } from "../schemas"
-import { productSchema } from "../data"
+import { errorSchema, ProductReference, productReferenceSchema } from "../schemas/index.js"
+import { productSchema } from "../data/index.js"
 
 const schema: FastifySchema = {
   tags: ['Products'],

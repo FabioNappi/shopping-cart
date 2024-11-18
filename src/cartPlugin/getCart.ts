@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
-import { errorSchema } from "../schemas"
+import { errorSchema } from "../schemas/index.js"
 import { FromSchema } from "json-schema-to-ts"
-import { Discount, productSchema } from "../data"
+import { Discount, productSchema } from "../data/index.js"
 
 const reply = {
   type: 'object',

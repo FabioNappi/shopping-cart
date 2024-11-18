@@ -1,4 +1,4 @@
-import { ProductReference } from "./product-reference";
+import { ProductReference } from "./product-reference.js";
 
 export interface Cart {
   products: ProductReference[],

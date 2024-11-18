@@ -1,2 +1,2 @@
-export * from './discount'
-export * from './product'
+export * from './discount.js'
+export * from './product.js'

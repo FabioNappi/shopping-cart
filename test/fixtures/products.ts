@@ -11,7 +11,7 @@ export const productsFixture: Product[] = [
     price: 222,
   },
   {
-    productId: 'product-1',
+    productId: 'product-3',
     price: 3333,
   },
 ]

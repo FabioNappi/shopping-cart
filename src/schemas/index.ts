@@ -1,3 +1,3 @@
-export * from './cart'
-export * from './error'
-export * from './product-reference'
+export * from './cart.js'
+export * from './error.js'
+export * from './product-reference.js'

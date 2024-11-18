@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto'
 import { productsFixture } from "./fixtures/products"
 import { discountsFixture } from "./fixtures/discounts"
 import { FastifyInstance } from "fastify"
-import { launchServer } from ".."
+import { launchServer } from "../src/server"
 
 const mongoHost = process.env.MONGO_HOST ?? '127.0.0.1:27017'
 
@@ -12,7 +12,7 @@ const getMongoDatabaseName = () => `test-${randomUUID()}`
 const getMongoURL = (databaseName: string) => `mongodb://${mongoHost}/${databaseName}`
 
 export const setupTest = async (): Promise<FastifyInstance> => {
-  const databaseName = getMongoDatabaseName()
+  const databaseName = 'mydb' // getMongoDatabaseName()
   const mongoURL = getMongoURL(databaseName)
 
   const client = await mongodb.MongoClient.connect(mongoURL)
@@ -24,6 +24,7 @@ export const setupTest = async (): Promise<FastifyInstance> => {
   await productsCollection.insertMany(productsFixture)
   await discountsCollection.deleteMany({})
   await discountsCollection.insertMany(discountsFixture)
+  await client.close()
 
   return launchServer()
 }
