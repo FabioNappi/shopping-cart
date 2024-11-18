@@ -4,12 +4,16 @@ import fastifySwagger from "@fastify/swagger"
 import fastifySwaggerUi from "@fastify/swagger-ui"
 import mongoConnector from "./data/mongo-connector.js"
 
-export async function launchServer(): Promise<FastifyInstance> {
+export interface ServerOptions {
+  mongoURL?: string
+}
+
+export async function launchServer(options?: ServerOptions): Promise<FastifyInstance> {
   const server = fastify({
     logger: true,
   })
   
-  server.register(mongoConnector)
+  server.register(mongoConnector, { mongoURL: options?.mongoURL ?? process.env.MONGO_URL })
   server.register(fastifySwagger, {
     openapi: {
       info: {
