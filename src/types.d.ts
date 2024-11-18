@@ -1,6 +1,6 @@
 import { mongodb } from "@fastify/mongodb"
-import { Cart, ErrorResponse } from "./src/schemas"
-import { Discount, Product } from "./src/data"
+import { Cart, ErrorResponse } from "./schemas/index.ts"
+import { Discount, Product } from "./data/index.ts"
 
 declare module 'fastify' {
   interface FastifyInstance {

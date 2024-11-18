@@ -1,15 +1,19 @@
-import fastify, { FastifyInstance } from 'fastify'
-import cartPlugin from './src/cartPlugin'
-import { fastifySwagger } from '@fastify/swagger'
-import { fastifySwaggerUi } from '@fastify/swagger-ui'
-import mongoConnector from './src/data/mongo-connector'
+import fastify, { FastifyInstance } from "fastify"
+import cartPlugin from "./cartPlugin/index.js"
+import fastifySwagger from "@fastify/swagger"
+import fastifySwaggerUi from "@fastify/swagger-ui"
+import mongoConnector from "./data/mongo-connector.js"
 
-export async function launchServer(): Promise<FastifyInstance> {
+export interface ServerOptions {
+  mongoURL?: string
+}
+
+export async function launchServer(options?: ServerOptions): Promise<FastifyInstance> {
   const server = fastify({
     logger: true,
   })
   
-  server.register(mongoConnector)
+  server.register(mongoConnector, { mongoURL: options?.mongoURL ?? process.env.MONGO_URL })
   server.register(fastifySwagger, {
     openapi: {
       info: {
@@ -32,8 +36,4 @@ export async function launchServer(): Promise<FastifyInstance> {
   })
 
   return server
-}
-
-if (require.main === module) {
-  launchServer()
 }

@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest, FastifySchema } from "fastify"
-import { errorSchema } from "../schemas"
+import { errorSchema } from "../schemas/index.js"
 import { FromSchema } from "json-schema-to-ts"
 
 const params = {

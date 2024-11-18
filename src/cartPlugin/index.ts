@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify"
-import { handler as getCartHandler, schema as getCartSchema } from "./getCart"
-import { handler as addProductHandler, schema as addProductSchema } from "./addProduct"
-import { handler as deleteProductHandler, schema as deleteProductSchema } from "./deleteProduct"
-import { handler as setDiscountHandler, schema as setDiscountSchema } from "./setDiscount"
-import { ErrorResponse } from "../schemas"
-import { setupDatabase } from "../data/mongo-connector"
-import { errorHandler } from "./errorHandler"
+import { handler as getCartHandler, schema as getCartSchema } from "./getCart.js"
+import { handler as addProductHandler, schema as addProductSchema } from "./addProduct.js"
+import { handler as deleteProductHandler, schema as deleteProductSchema } from "./deleteProduct.js"
+import { handler as setDiscountHandler, schema as setDiscountSchema } from "./setDiscount.js"
+import { ErrorResponse } from "../schemas/index.js"
+import { setupDatabase } from "../data/mongo-connector.js"
+import { errorHandler } from "./errorHandler.js"
 
 async function cartPlugin(server: FastifyInstance) {
   await setupDatabase(server)
