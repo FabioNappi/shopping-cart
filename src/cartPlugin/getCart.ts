@@ -54,7 +54,10 @@ async function handler(this: FastifyInstance, request: FastifyRequest, reply: Fa
   if (this.cart.discount !== undefined) {
     foundDiscount = await this.discountsCollection.findOne({ code: this.cart.discount })
     if (foundDiscount === null) {
-      return reply.sendError(404, { error: 'DISCOUNT_NOT_FOUND' })
+      return reply.sendError(404, {
+        error: 'DISCOUNT_NOT_FOUND',
+        message: `discount '${this.cart.discount}' not found`
+      })
     }
   }
 
@@ -62,7 +65,10 @@ async function handler(this: FastifyInstance, request: FastifyRequest, reply: Fa
   for (const product of this.cart.products) {
     const foundProduct = foundProducts.find(p => p.productId === product.productId)
     if (foundProduct === undefined) {
-      return reply.sendError(404, { error: 'PRODUCT_NOT_FOUND' })
+      return reply.sendError(404, {
+        error: 'PRODUCT_NOT_FOUND',
+        message: `product '${product.productId}' not found in cart`
+      })
     }
 
     resultingCart.push({

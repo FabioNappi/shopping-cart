@@ -46,7 +46,10 @@ const schema: FastifySchema = {
 async function handler(this: FastifyInstance, request: FastifyRequest<{Params: Params, Querystring: Querystring}>, reply: FastifyReply) {
   const productIndex = this.cart.products.findIndex(product => product.productId === request.params.productId)
   if (productIndex === -1) {
-    return reply.sendError(404, { error: 'PRODUCT_NOT_FOUND' })
+    return reply.sendError(404, {
+      error: 'PRODUCT_NOT_FOUND',
+      message: `product '${request.params.productId}' not found in cart`
+    })
   }
   
   const quantityToRemove = request.query.quantity ?? this.cart.products[productIndex].quantity
