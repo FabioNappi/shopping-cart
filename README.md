@@ -29,3 +29,14 @@ Choose a database system to keep the following collections:
 ### Containerization
 
 Containerize the web server with Docker and write a Docker Compose to ship both the web server and the database system.
+
+An initialization script is executed the first time the Mongo container is launched. It initializes the database collections as follows:
+
+- products
+  - product-1
+  - product-1
+  - product-3
+- discounts
+  - discount-1
+  - discount-2
+  - discount-3
